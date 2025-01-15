@@ -46,7 +46,7 @@ public class Form extends javax.swing.JFrame {
             throw new InvalidStudentDataException("Email không được để trống");
         }
 
-        if (student.getDiemtongket() < 0 || student.getDiemtongket() > 10) {
+        if (student.getDiemtongket() < 0 && student.getDiemtongket() > 10) {
             throw new InvalidStudentDataException("Điểm tổng kết không hợp lệ");
         }
     }
