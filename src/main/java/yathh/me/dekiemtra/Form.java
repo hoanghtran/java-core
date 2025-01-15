@@ -136,11 +136,6 @@ public class Form extends javax.swing.JFrame {
 
         txtDiaChi.setForeground(new java.awt.Color(153, 153, 153));
         txtDiaChi.setText("Ha Dong, Ha Noi");
-        txtDiaChi.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                TxtFocusGained(evt);
-            }
-        });
         txtDiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDiaChiActionPerformed(evt);
@@ -157,11 +152,6 @@ public class Form extends javax.swing.JFrame {
 
         txtEmail.setForeground(new java.awt.Color(153, 153, 153));
         txtEmail.setText("VanA@gmail.com");
-        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                TxtFocusGained(evt);
-            }
-        });
 
         txtDiem.setForeground(new java.awt.Color(153, 153, 153));
         txtDiem.setText("8.0");
@@ -317,6 +307,14 @@ public class Form extends javax.swing.JFrame {
         Student student = new Student();
         boolean isValid = true;
 
+        // Nếu tất cả dữ liệu hợp lệ, tiếp tục xử lý và thêm vào danh sách
+        student.setDiachi(txtDiaChi.getText());
+        student.setEmail(txtEmail.getText());
+        student.setGioitinh(cbGioiTinh.getSelectedItem().toString());
+        student.setHoten(txtHoTen.getText());
+        student.setMasinhvien(txtMaSV.getText());
+        student.setNgaysinh(txtNgaySinh.getText());
+
         try {
             validateStudentData(student);
         } catch (InvalidStudentDataException ex) {
@@ -341,14 +339,6 @@ public class Form extends javax.swing.JFrame {
         }
 
         if (isValid) {
-            // Nếu tất cả dữ liệu hợp lệ, tiếp tục xử lý và thêm vào danh sách
-            student.setDiachi(txtDiaChi.getText());
-            student.setEmail(txtEmail.getText());
-            student.setGioitinh(cbGioiTinh.getSelectedItem().toString());
-            student.setHoten(txtHoTen.getText());
-            student.setMasinhvien(txtMaSV.getText());
-            student.setNgaysinh(txtNgaySinh.getText());
-
             students.add(student);  // Chỉ thêm vào danh sách khi tất cả hợp lệ
             student.thongTin();     // Hiển thị thông tin sinh viên
         }

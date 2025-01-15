@@ -205,7 +205,6 @@
         <Property name="text" type="java.lang.String" value="Ha Dong, Ha Noi"/>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TxtFocusGained"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDiaChiActionPerformed"/>
       </Events>
     </Component>
@@ -227,9 +226,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="VanA@gmail.com"/>
       </Properties>
-      <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TxtFocusGained"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDiem">
       <Properties>
