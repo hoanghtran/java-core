@@ -23,6 +23,34 @@ public class Form extends javax.swing.JFrame {
 
     List<Student> students = new ArrayList<>();
 
+    public void validateStudentData(Student student) throws InvalidStudentDataException {
+        if (student.getHoten() == null || student.getHoten().isEmpty()) {
+            throw new InvalidStudentDataException("Họ tên không được để trống");
+        }
+
+        if (student.getNgaysinh() == null || student.getNgaysinh().isEmpty()) {
+            throw new InvalidStudentDataException("Ngày sinh không được để trống");
+        }
+
+        if (student.getDiachi() == null || student.getDiachi().isEmpty()) {
+            throw new InvalidStudentDataException("Dia chi không được để trống");
+        }
+
+        if (student.getMasinhvien() == null || student.getMasinhvien().isEmpty()) {
+            throw new InvalidStudentDataException("Mã sinh viên không được để trống");
+        } else if (!(student.getMasinhvien().startsWith("AT"))) {
+            throw new InvalidStudentDataException("Mã sinh viên phải bắt đầu bằng AT");
+        }
+
+        if (student.getEmail() == null || student.getEmail().isEmpty()) {
+            throw new InvalidStudentDataException("Email không được để trống");
+        }
+
+        if (student.getDiemtongket() < 0 || student.getDiemtongket() > 10) {
+            throw new InvalidStudentDataException("Điểm tổng kết không hợp lệ");
+        }
+    }
+
     public static void main(String[] args) {
         new Form().setVisible(true);
     }
@@ -85,15 +113,61 @@ public class Form extends javax.swing.JFrame {
 
         jLabel12.setText("Điểm tổng kết");
 
+        txtHoTen.setForeground(new java.awt.Color(153, 153, 153));
+        txtHoTen.setText("Tran Van A");
+        txtHoTen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                HoTenFocusGained(evt);
+            }
+        });
         txtHoTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHoTenActionPerformed(evt);
             }
         });
 
+        txtNgaySinh.setForeground(new java.awt.Color(153, 153, 153));
+        txtNgaySinh.setText("01/01/1999");
+        txtNgaySinh.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TxtFocusGained(evt);
+            }
+        });
+
+        txtDiaChi.setForeground(new java.awt.Color(153, 153, 153));
+        txtDiaChi.setText("Ha Dong, Ha Noi");
+        txtDiaChi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TxtFocusGained(evt);
+            }
+        });
         txtDiaChi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDiaChiActionPerformed(evt);
+            }
+        });
+
+        txtMaSV.setForeground(new java.awt.Color(153, 153, 153));
+        txtMaSV.setText("AT190221");
+        txtMaSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaSVActionPerformed(evt);
+            }
+        });
+
+        txtEmail.setForeground(new java.awt.Color(153, 153, 153));
+        txtEmail.setText("VanA@gmail.com");
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TxtFocusGained(evt);
+            }
+        });
+
+        txtDiem.setForeground(new java.awt.Color(153, 153, 153));
+        txtDiem.setText("8.0");
+        txtDiem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TxtFocusGained(evt);
             }
         });
 
@@ -137,26 +211,26 @@ public class Form extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(90, 90, 90))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,17 +315,57 @@ public class Form extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Student student = new Student();
-        student.setDiachi(txtDiaChi.getText());
-        student.setDiemtongket(Float.parseFloat(txtDiem.getText()));
-        student.setEmail(txtEmail.getText());
-        student.setGioitinh(cbGioiTinh.getSelectedItem().toString());
-        student.setHoten(txtHoTen.getText());
-        student.setMasinhvien(txtMaSV.getText());
-        student.setNgaysinh(txtNgaySinh.getText());
+        boolean isValid = true;
 
-        students.add(student);
-        student.thongTin();
+        try {
+            validateStudentData(student);
+        } catch (InvalidStudentDataException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            isValid = false;  // Dữ liệu không hợp lệ, dừng lại
+        }
+
+        if (isValid) {
+            // Kiểm tra điểm không thể trống
+            try {
+                if (txtDiem.getText().isEmpty()) {
+                    throw new InvalidStudentDataException("Điểm không thể để trống");
+                }
+                student.setDiemtongket(Float.parseFloat(txtDiem.getText()));
+            } catch (InvalidStudentDataException e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+                isValid = false;  // Dữ liệu không hợp lệ, dừng lại
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "Điểm phải là một số hợp lệ");
+                isValid = false;  // Dữ liệu không hợp lệ, dừng lại
+            }
+        }
+
+        if (isValid) {
+            // Nếu tất cả dữ liệu hợp lệ, tiếp tục xử lý và thêm vào danh sách
+            student.setDiachi(txtDiaChi.getText());
+            student.setEmail(txtEmail.getText());
+            student.setGioitinh(cbGioiTinh.getSelectedItem().toString());
+            student.setHoten(txtHoTen.getText());
+            student.setMasinhvien(txtMaSV.getText());
+            student.setNgaysinh(txtNgaySinh.getText());
+
+            students.add(student);  // Chỉ thêm vào danh sách khi tất cả hợp lệ
+            student.thongTin();     // Hiển thị thông tin sinh viên
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TxtFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtFocusGained
+
+    private void txtMaSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaSVActionPerformed
+
+    private void HoTenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_HoTenFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HoTenFocusGained
 
     /**
      * @param args the command line arguments
